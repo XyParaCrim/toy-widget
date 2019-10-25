@@ -7,7 +7,7 @@
 - [anrajs - toy-widget + svg流程图编辑器，提供拖、连线、快捷键、事件处理、图形绘制、选择监听等一系列编辑器功能。](https://github.com/anrainie/anrajs)
 
 ### Flexible Feature
-程序是由一个个部件(Widget)对象组合而成，而部件的特性(feature)完全可以根据开发者想法自己定制。当然，内置了一些流程图的相关特性：
+程序是由一个个部件(Widget)对象组合而成，而部件的特性([feature](#Features))完全可以根据开发者想法自己定制。当然，内置了一些流程图的相关特性：
 
 - 组件化(composable)
 - 响应式(reactive)
@@ -25,7 +25,7 @@
 以上内置部件特性也完全是热插拔的。
 
 ### Fully Configurable
-- 部件配置化：每个部件的实现都是以完全配置化为目标，即必须通过配置选项(options)实例化
+- 部件配置化：每个部件的实现都是以完全配置化为目标，即必须通过配置选项([options](#Options))实例化
 - 特性配置化：配置新的特性，产生新的编辑器框架
 
 ### Simple Lifecycle Template
@@ -95,7 +95,7 @@ badNode.getNameAndSize() // "bad-node-17"
 
 ### Options
 
-内置特性(Feature)支持的选项(Options)
+用于实例化部件的唯一输入(一个部件支持哪些Options是由其组成的Features决定的)，以下是一些通用内置特性(Feature)支持的选项(Options)：
 
 | Option                   | Default              |      Feature              |  Description |
 | ------------------------ | -------------------- | ------------------------- | ------------------------- |
@@ -115,7 +115,7 @@ badNode.getNameAndSize() // "bad-node-17"
 
 ### Features
 
-根据编辑器需要内置的特性
+用于构建不同类型部件的元素，以下是根据编辑器需要内置的特性：
 
 | Option                   | Supported Widgets             |  Description |
 | -------------------------| ------------------------------| ------------ |
