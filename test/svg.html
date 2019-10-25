@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+  </head>
+  <body>
+    <div id="ds"></div>
+   <!-- <script src="../node_modules/jquery/dist/jquery.min.js"></script>-->
+    <script>
+      window.onload = function () {
+        var a = [45, 45, 45, 45, 45, 45, 45, 45, 45, 45]
+  var b = [
+          'red',
+          'blue',
+          'yellow',
+          'green',
+          'gray',
+          '#BCD68D',
+          '#21C670',
+          '#D3C294',
+          '#D84C29',
+          '#F0F0F0'
+        ]
+  var c = [
+          'North',
+          'South',
+          'East',
+          'West',
+          'North',
+          'South',
+          'East',
+          'West',
+          'North',
+          'South'
+        ]
+  document.body.appendChild(
+          pieChart(a, 640, 400, 200, 200, 150, b, c, 500, 100)
+        )
+}
+/* 创建一个<svg>元素，并在其中绘制一个饼状图
+ * 参数
+ *   data:用于绘制的数字类型的数组，数组每一项都有表示饼状图的一个
+ *   width,height:SVG图形的大小，单位像素
+ *   cx,cy,r:饼状图的圆心及半径
+ *   colors:一个包含HTML颜色信息的数组，每种颜色代表饼状图每个楔的颜色
+ *   lables一个标签数组，该信息说明饼状图中每个楔代表的含义
+ *   lx,ly：饼状图的左上角
+ * 返回：
+ *   一个保存饼状图的<svg>元素
+ *   调用者必须返回的元素插入到文档中
+ *   */
+function pieChart (
+        data,
+        width,
+        height,
+        cx,
+        cy,
+        r,
+        colors,
+        labels,
+        lx,
+        ly
+      ) {
+        // 这个表示svg元素的xml命名空间
+        var svgns = 'http://www.w3.org/2000/svg'
+  var deg = 360 / data.length / 2
+
+  // 创建一个<svg>元素，同时指定像素大小和用户坐标
+  var chart = document.createElementNS(svgns, 'svg:svg')
+  chart.setAttribute('width', width)
+  chart.setAttribute('height', height)
+  chart.setAttribute('viewBox', '0 0 ' + width + ' ' + height)
+
+  // 累加data值，以便于知道饼状图的大小
+  var total = 0
+  for (var i = 0; i < data.length; i++) {
+          total += data[i]
+  }
+
+        // 现在计算出饼状图每个分片的大小，其中角度以弧度制计算
+        var angles = []
+  for (var i = 0; i < data.length; i++) {
+          angles[i] = (data[i] / total) * Math.PI * 2
+  }
+
+        // 遍历病状图的每个分片
+        starttangle = 0
+  for (var i = 0; i < data.length; i++) {
+          // 这里表示楔的结束为止
+          var endangle = starttangle + angles[i]
+
+    // 计算出楔和园橡胶的两个点
+    // 这些计算公式都是以12点钟方向为0°
+    // 顺时针方向角度递增
+    var x1 = cx + r * Math.sin(starttangle)
+    var y1 = cy - r * Math.cos(starttangle)
+    var x2 = cx + r * Math.sin(endangle)
+    var y2 = cy - r * Math.cos(endangle)
+
+    // 这个标记表示角度大于半圆
+    // 此标记在绘制SBG弧形组件的时候需要
+    var big = 0
+    if (endangle - starttangle > Math.PI) big = 1
+
+    // 使用<svg:path>元素来描述楔
+    // 要注意的是，使用ctreateElementNS()来创建该元素
+    var path = document.createElementNS(svgns, 'path')
+
+    // 下面的字符串包含路径的详细信息
+    var d =
+            'M ' +
+            cx +
+            ',' +
+            cy + // 从圆心开始
+            ' L ' +
+            x1 +
+            ',' +
+            y1 + // 画一条到(x1,y1)的线段
+            ' A ' +
+            r +
+            ',' +
+            r + // 再画一条半径为r的弧
+            ' 0 ' +
+            big +
+            ' 1 ' + // 弧的详细信息
+            x2 +
+            ',' +
+            y2 + // 弧到(x2,y2)结束
+            'Z' // d当前路径到(cx,cy)结束
+
+    // 设置<svg:path>元素的属性
+
+    path.setAttribute('d', d) // 设置路径
+    path.setAttribute('fill', colors[i]) // 设置楔的颜色
+    path.setAttribute('stroke', 'black') // 楔的外边框为黑色
+    path.setAttribute('stroke-width', '2') // 两个单位
+    chart.append(path)
+    // 当前楔的结束就是下一个楔的开始
+    starttangle = endangle
+
+    // 在小方块的右边添加标签
+    var label = document.createElementNS(svgns, 'text')
+    var average = data.length / 2
+    console.log(average)
+    if (i < average) {
+            label.setAttribute('x', (x1 + x2) / 2 - 15) // 定位标签文本
+            label.setAttribute('y', (y1 + y2) / 2 + 15)
+            console.log('小于4')
+    } else {
+            console.log('大于4')
+            label.setAttribute('x', (x1 + x2) / 2 - 15) // 定位标签文本
+            label.setAttribute('y', (y1 + y2) / 2 + 15)
+    }
+          label.setAttribute('font-family', 'sans-serif')
+    label.setAttribute('font-size', '16')
+    label.appendChild(document.createTextNode(labels[i]))
+    var t_left = (x1 + x2) / 2
+    var t_top = (y1 + y2) / 2
+    label.setAttribute(
+            'transform',
+            'rotate(' + deg + ', ' + t_left + ', ' + t_top + ')'
+          )
+    chart.appendChild(label) // 将文本添加到饼状图
+    deg += 360 / data.length
+  }
+        return chart
+}
+    </script>
+  </body>
+</html>
