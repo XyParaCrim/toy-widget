@@ -1,2 +1,2 @@
-import Aditor from './src/editor/index'
-export default Aditor
+import ToyWidget from './src/editor/index'
+export default ToyWidget

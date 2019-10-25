@@ -1,9 +1,9 @@
-# 
+# Toy-Widget
 
 ## 特性
 一套用于构建各式各样图形编辑器的基本框架。
 
-- [aditor-svg](https://github.com/anrainie/anrajs/tree/master/modules/aditor-svg) - anrajs + svg流程图编辑器，提供拖、连线、快捷键、事件处理、图形绘制、选择监听等一系列编辑器功能。
+- [anrajs](https://github.com/anrainie/anrajs/tree/master/modules/aditor-svg) - toy-widget + svg流程图编辑器，提供拖、连线、快捷键、事件处理、图形绘制、选择监听等一系列编辑器功能。
 
 ### 灵活的特性
 程序是由一个个部件(Widget)对象组合而成，而部件的特性(feature)完全可以根据开发者想法自己定制。当然，内置了一些流程图的相关特性：
@@ -41,10 +41,10 @@ npm install anrajs
 定义一个名叫Node的新部件，并添加默认选项name；然后为Node添加支持name和size选项的特性
 
 ```js
-import Aditor from 'anrajs'
+import ToyWidget from 'toy-widget'
 
-Aditor.Widget.define('Node', { name: 'good-node' })
-Aditor.Widget.feature('Node', {
+ToyWidget.Widget.define('Node', { name: 'good-node' })
+ToyWidget.Widget.feature('Node', {
   // 定义支持的选项
   options: {
     name: {
@@ -84,9 +84,9 @@ Aditor.Widget.feature('Node', {
 ```
 创建不同的Node部件
 ```js
-let defaultNode = Aditor.Widget.of('Node')
+let defaultNode = ToyWidget.Widget.of('Node')
 defaultNode.getNameAndSize() //"good-node-16"
 
-let badNode = Aditor.Widget.of('Node', {name: 'bad-node', size: '17'})
+let badNode = ToyWidget.Widget.of('Node', {name: 'bad-node', size: '17'})
 badNode.getNameAndSize() // "bad-node-17"
 ```
