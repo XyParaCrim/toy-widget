@@ -2,9 +2,9 @@
 [![codebeat badge](https://codebeat.co/badges/d2b4b94b-8c27-41e5-8485-e4133c29361b)](https://codebeat.co/projects/github-com-xyparacrim-toy-widget-master)
 
 ## Feature
-一套用于构建各式各样图形编辑器的基本框架。
+一套用于构建图形编辑器的基本框架
 
-- [anrajs](https://github.com/anrainie/anrajs/tree/master/modules/aditor-svg) - toy-widget + svg流程图编辑器，提供拖、连线、快捷键、事件处理、图形绘制、选择监听等一系列编辑器功能。
+- [anrajs - toy-widget + svg流程图编辑器，提供拖、连线、快捷键、事件处理、图形绘制、选择监听等一系列编辑器功能。](https://github.com/anrainie/anrajs)
 
 ### Flexible Feature
 程序是由一个个部件(Widget)对象组合而成，而部件的特性(feature)完全可以根据开发者想法自己定制。当然，内置了一些流程图的相关特性：
@@ -19,6 +19,7 @@
 - 虚拟事件(tracker)
 - 虚拟节点结构(children)
 - 数据绑定(model)
+- 操作模式(operator)
 - 。。。
 
 以上内置部件特性也完全是热插拔的。
@@ -36,9 +37,9 @@
 npm install toy-widget
 ```
 
-### How to use
-
-定义一个名叫Node的新部件，并添加默认选项name；然后为Node添加支持name和size选项的特性
+## How to toy
+1. 定义一个名叫Node的新部件，并添加默认选项name
+2. 为Node添加支持name和size选项的特性
 
 ```js
 import ToyWidget from 'toy-widget'
@@ -90,4 +91,53 @@ defaultNode.getNameAndSize() //"good-node-16"
 let badNode = ToyWidget.Widget.of('Node', {name: 'bad-node', size: '17'})
 badNode.getNameAndSize() // "bad-node-17"
 ```
+## Important Conception
+
+### Options
+
+内置特性(Feature)支持的选项(Options)
+
+| Option                   | Default              |      Feature              |  Description |
+| ------------------------ | -------------------- | ------------------------- | ------------------------- |
+| `on`                     | `{}`                 | `emitter`                 |  注册部件事件               |
+| `class`                  | `''`                 | `styleable`               |  Dom class绑定             |
+| `style`                  | `{}`                 | `styleable`               |  Dom style绑定             |
+| `attr`                   | `{}`                 | `styleable`               |  Dom attribute绑定         |
+| `createElement`          | `noop`               | `element`                 |  创建Dom方法               |
+| `composite`              | `{}`                 | `composable`              |  定义部件之间的组合方式      |
+| `separate`               | `{}`                 | `composable`              |  定义部件之间的分离方式      |
+| `model`                  | `null`               | `model`                   |  数据绑定                   |
+| `policies`               | `{}`                 | `policy`                  |  注册部件策略(特性Policy提供策略机制) |
+| `visual`                 | `{}`                 | `visual`                  |  定义视图的显示方式          |
+| `createTracker`          | `{}`                 | `tracker`                 |  定义部件如果处理和传递虚拟事件 |
+| `operation`              | `{}`                 | `operator`                |  注册快捷键等               |
+| `tool`                   | `{}`                 | `tool`                    |  注册部件工具(特性Tool提供的工具机制) |
+
+### Features
+
+根据编辑器需要内置的特性
+
+| Option                   | Supported Widgets             |  Description |
+| -------------------------| ------------------------------| ------------ |
+| `emitter`                | `*`                           | 事件机制      |
+| `styleable`              | `*`                           | Dom样式绑定   |
+| `commander`              | `Canvas`                      | 处理命令，支持基本命令功能，如撤销、重做等等|
+| `element`                | `*`                           | 关于部件与Dom的关系(内置实现：简答地一对一绑定，创建，销毁等)
+| `composable`             | `*`                           | 定义关于部件与部件之间的关系
+| `selection`              | `Canvas`                      | 管理选择处理
+| `selected`               | `EditPart`                    | 成为一个可选择部件，并通知selection部件
+| `display`                | `Canvas`                      | 真实事件与虚拟事件之间的转换
+| `display-element`        | `EditPart`                    | 具备接受虚拟事件的能力
+| `event-bus`              | `Canvas`                      | 事件总线，定义如何分发事件
+| `operator`               | `Canvas`                      | 用于快捷键、右键菜单等
+| `tool`                   | `Canvas`                      | 工具机制(将相应的处理方式抽象)
+| `model`                  | `EditPart`                    | 数据绑定
+| `policy`                 | `EditPart`                    | 策略模式
+| `children`               | `EditPart`                    | 通过响应数据变化，管理虚拟节点结构
+| `composite`              | `EditPart`                    | 提供部件的查询API
+| `hash`                   | `EditPart`                    | 映射部件对象，主要用于查询
+| `tracker`                | `EditPart`                    | 定义部件如果处理和传递虚拟事件
+| `visual`                 | `EditPart`                    | 定义视图的展示和刷新方式
+| `handle-visual`          | `Handle`                      | 特殊的视图的展示和刷新方式
+
 
