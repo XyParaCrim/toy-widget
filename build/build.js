@@ -4,9 +4,9 @@ import resolve from "rollup-plugin-node-resolve";
 export default {
   input: "index.js",
   output: {
-    file: 'dist/aditor.es.js',
+    file: 'dist/toy-widget.js',
     format: 'es',
-    name: 'Aditor'
+    name: 'ToyWidget'
   },
   plugins: [commonjs(), resolve()]
 }

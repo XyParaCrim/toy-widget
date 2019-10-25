@@ -2,13 +2,14 @@
   "name": "toy-widget",
   "version": "1.0.0",
   "description": "一套用于构建各式各样图形编辑器的基本框架",
-  "main": "index.js",
-  "directories": {
-    "test": "test"
-  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "rollup --config build/build.js",
+    "pushlish": "npm publish"
   },
+  "files": [
+    "dist/toy-widget.js"
+  ],
+  "main": "dist/toy-widget.js",
   "author": "",
   "license": "MIT",
   "dependencies": {
