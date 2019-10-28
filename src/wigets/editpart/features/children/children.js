@@ -3,11 +3,11 @@ import CompositedStore from "../../../../common/composited-store";
 import CompositedObserver from "../../../../common/composited-observer";
 
 class Children {
-  constructor (editPart, options) {
+  constructor (editPart, childrenOptions) {
     this.editPart = editPart
     // auto composite by model --- children
     this.stores = Array.of()
-    $object.loopIfObject(options.model, (eventPrefix, options) => this.stores.push(new CompositedStore(editPart, eventPrefix, options)))
+    $object.loopIfObject(childrenOptions, (eventPrefix, options) => this.stores.push(new CompositedStore(editPart, eventPrefix, options)))
   }
 
   clear () {
