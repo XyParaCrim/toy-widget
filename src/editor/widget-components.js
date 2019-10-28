@@ -22,3 +22,24 @@ export default {
 
   Widget: widgetMap
 }
+
+export const WidgetComponentsAPI = {
+  nodeComponents() {
+    return nodeMap
+  },
+  lineComponents() {
+    return lineMap
+  },
+
+  canvasComponents() {
+    return canvasMap
+  },
+
+  handleComponents() {
+    return handleMap
+  },
+
+  widgetComponents() {
+    return widgetMap
+  },
+}

@@ -108,7 +108,7 @@ badNode.getNameAndSize() // "bad-node-17"
 | `separate`               | `{}`                 | `composable`              |  定义部件之间的分离方式      |
 | `model`                  | `null`               | `model`                   |  数据绑定                   |
 | `policies`               | `{}`                 | `policy`                  |  注册部件策略(特性Policy提供策略机制) |
-| `visual`                 | `{}`                 | `visual`                  |  定义视图的显示方式          |
+| `visual`                 | `{}`                 | `visual`                  |  定义视图的渲染方式          |
 | `createTracker`          | `{}`                 | `tracker`                 |  定义部件如果处理和传递虚拟事件 |
 | `operation`              | `{}`                 | `operator`                |  注册快捷键等               |
 | `tool`                   | `{}`                 | `tool`                    |  注册部件工具(特性Tool提供的工具机制) |
@@ -117,12 +117,12 @@ badNode.getNameAndSize() // "bad-node-17"
 
 用于构建不同类型部件的元素，以下是根据编辑器需要内置的特性：
 
-| Option                   | Supported Widgets             |  Description |
+| Feature                  | Supported Widgets             |  Description |
 | -------------------------| ------------------------------| ------------ |
 | `emitter`                | `*`                           | 事件机制      |
 | `styleable`              | `*`                           | Dom样式绑定   |
 | `commander`              | `Canvas`                      | 处理命令，支持基本命令功能，如撤销、重做等等|
-| `element`                | `*`                           | 关于部件与Dom的关系(内置实现：简答地一对一绑定，创建，销毁等)
+| `element`                | `*`                           | 关于部件与Dom的关系(内置实现：简单地一对一绑定，创建，销毁等)
 | `composable`             | `*`                           | 定义关于部件与部件之间的关系
 | `selection`              | `Canvas`                      | 管理选择处理
 | `selected`               | `EditPart`                    | 成为一个可选择部件，并通知selection部件
@@ -130,14 +130,14 @@ badNode.getNameAndSize() // "bad-node-17"
 | `display-element`        | `EditPart`                    | 具备接受虚拟事件的能力
 | `event-bus`              | `Canvas`                      | 事件总线，定义如何分发事件
 | `operator`               | `Canvas`                      | 用于快捷键、右键菜单等
-| `tool`                   | `Canvas`                      | 工具机制(将相应的处理方式抽象)
+| `tool`                   | `Canvas`                      | 工具机制(将相应的操作处理抽象)
 | `model`                  | `EditPart`                    | 数据绑定
 | `policy`                 | `EditPart`                    | 策略模式
 | `children`               | `EditPart`                    | 通过响应数据变化，管理虚拟节点结构
 | `composite`              | `EditPart`                    | 提供部件的查询API
 | `hash`                   | `EditPart`                    | 映射部件对象，主要用于查询
 | `tracker`                | `EditPart`                    | 定义部件如果处理和传递虚拟事件
-| `visual`                 | `EditPart`                    | 定义视图的展示和刷新方式
-| `handle-visual`          | `Handle`                      | 特殊的视图的展示和刷新方式
+| `visual`                 | `EditPart`                    | 定义视图的渲染方式
+| `handle-visual`          | `Handle`                      | 特殊的视图的渲染方式
 
 

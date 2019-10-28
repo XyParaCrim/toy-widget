@@ -136,8 +136,18 @@ export function instanceOf (instance, Ctr) {
   return instance instanceof Ctr
 }
 
-export function deepCopy () {
-
+export function deepCopy (obj) {
+  let result = Array.isArray(obj) ? [] : {};
+  for (let key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      if (typeof obj[key] === 'object' && obj[key]!==null) {
+        result[key] = deepCopy(obj[key]);
+      } else {
+        result[key] = obj[key];
+      }
+    }
+  }
+  return result;
 }
 
 export function copy (obj) {

@@ -13,5 +13,13 @@ function makeSimpleMap() {
 
 export default {
   Policy: makeSimpleMap(),
-  Tool: makeSimpleMap()
+  Tool: makeSimpleMap(),
+  Operation: makeSimpleMap()
+}
+
+// TODO
+export const CustomizationComponentsApi = {
+  tool (name, request) {
+    this.root.tool.active(name, request)
+  }
 }

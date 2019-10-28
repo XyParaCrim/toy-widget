@@ -1,32 +1,9 @@
 import WidgetElements from '../../widget-components'
 
-export default function commonAPIFeature() {
+let id = 0
 
-  const commonAPI = {
-    nodeComponents() {
-      return WidgetElements.Node
-    },
-    lineComponents() {
-      return WidgetElements.Line
-    },
-
-    canvasComponents() {
-      return WidgetElements.Canvas
-    },
-
-    handleComponents() {
-      return WidgetElements.Handle
-    },
-
-    widgetComponents() {
-      return WidgetElements.Widget
-    },
-
-    tool (name, request) {
-      this.root.tool.active(name, request)
-    }
-  }
-
+// TODO
+export default function commonAPIFeature(commonAPI) {
   WidgetElements.Node.mix(commonAPI)
   WidgetElements.Line.mix(commonAPI)
   WidgetElements.Handle.mix(commonAPI)
@@ -34,7 +11,7 @@ export default function commonAPIFeature() {
   //WidgetElements.Widget.mix(commonAPI)
 
   return {
-    name: 'commonAPI',
+    name: 'commonAPI' + '$' + id++,
 
     mixin: commonAPI
   }

@@ -5,13 +5,15 @@ export default function childrenFeature () {
     name: 'children',
 
     options: {
-      // composable: {}
+      children: {
+        merge: 'assign'
+      }
     },
 
     defaults: {
       on: {
         create() {
-          this.children = new Children(this, this.options.get('composable'))
+          this.children = new Children(this, this.options.get('children'))
         },
         active () {
           this.children.refresh() // parent is actived when children
