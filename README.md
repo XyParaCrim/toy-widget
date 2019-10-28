@@ -1,5 +1,6 @@
 # Toy-Widget
 [![codebeat badge](https://codebeat.co/badges/d2b4b94b-8c27-41e5-8485-e4133c29361b)](https://codebeat.co/projects/github-com-xyparacrim-toy-widget-master)
+[![npm version](https://badge.fury.io/js/toy-widget.svg)](https://badge.fury.io/js/toy-widget)
 
 ## Feature
 一套用于构建图形编辑器的基本框架。开发者可以根据自己的想法，添加自己的数据响应式、状态管理、事件响应等等；选择图形绘画方式...以下是实现的一些编辑器框架：
