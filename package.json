@@ -1,10 +1,11 @@
 {
   "name": "toy-widget",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "一套用于构建各式各样图形编辑器的基本框架",
   "scripts": {
     "build": "rollup --config build/build.js",
-    "pushlish": "npm publish"
+    "build to aditor": "rollup --config build/unsafe-build.js",
+    "pushlish": "npm run build && npm publish"
   },
   "files": [
     "dist/toy-widget.js"

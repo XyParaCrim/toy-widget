@@ -4,7 +4,7 @@ import resolve from "rollup-plugin-node-resolve";
 export default {
   input: "index.js",
   output: {
-    file: 'modules/aditor-svg/node_modules/anrajs/dist/aditor.es.js',
+    file: '../aditor/node_modules/toy-widget/dist/toy-widget.js',
     format: 'es',
     name: 'Aditor'
   },
